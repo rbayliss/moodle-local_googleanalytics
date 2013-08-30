@@ -26,7 +26,7 @@
  */
 
 $plugin->version  = 2013082204;
-$plugin->requires = 2011120500;
+$plugin->requires = 2011033010;
 $plugin->release = '1.0 (Build: 2013071500)';
-$plugin->maturity = MATURITY_BETA;
+$plugin->maturity = MATURITY_STABLE;
 $plugin->component = 'local_googleanalytics';
