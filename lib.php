@@ -24,7 +24,7 @@
  * @package    local
  * @subpackage local_googleanalytics
  * @copyright  2013 Bas Brands, www.basbrands.nl
- * @author 	   Bas Brands, Gavin Henrick.
+ * @author 	   Bas Brands and Gavin Henrick.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -86,6 +86,6 @@ if ($gakey) {
     </script>";
 }
 
-if (isset($CFG->debugdisplay)) {
+if (debugging()) {
     $CFG->additionalhtmlfooter .= "<span class='badge badge-success'>/".$trackurl."</span>";
 }

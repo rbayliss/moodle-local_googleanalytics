@@ -17,7 +17,8 @@
 /**
  * Google Analytics
  *
- * This module has been created to provide a quick and easy way of loggin into a course
+ * This local plugin that adds a 'friendly url' version of Google analytics
+ * to Moodle
  *
  * @package    local
  * @subpackage googleanalytics
