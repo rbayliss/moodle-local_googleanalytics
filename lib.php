@@ -46,8 +46,12 @@ function ga_trackurl() {
         }
     }
 
-    // Adds course full name.
-    if (isset($pageinfo[1]->fullname)) {
+    // Adds course shortname if configured.
+    if (get_config('local_googleanalytics', 'courseshortname') && 
+            isset($pageinfo[1]->shortname)) {
+        $trackurl[] = urlencode($pageinfo[1]->shortname);
+    } else if (isset($pageinfo[1]->fullname)) {
+        // Adds course full name.
         $trackurl[] = urlencode($pageinfo[1]->fullname);
     }
 

@@ -51,5 +51,11 @@ if ($hassiteconfig) {
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $settings->add($setting);
 
+    $name = 'local_googleanalytics/courseshortname';
+    $title = get_string('courseshortname', 'local_googleanalytics');
+    $description = get_string('courseshortname_desc', 'local_googleanalytics');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+    $settings->add($setting);
+
 }
 

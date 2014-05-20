@@ -30,3 +30,5 @@ $string['gakey'] = 'Key';
 $string['gakey_desc'] = 'Enter your Google Analytics key';
 $string['enabled'] = 'Enabled';
 $string['enabled_desc'] = 'Enable smart Google Analytics for Moodle';
+$string['courseshortname'] = 'Use course shortname';
+$string['courseshortname_desc'] = 'Log using course shortname instead of title.';
