@@ -35,8 +35,9 @@ function ga_trackurl() {
 
     $trackurl = array();
 
-    if ($COURSE->id == 1) {
-        return '';
+    // Logging full URLs if not in a course site.
+    if ($COURSE->id == SITEID) {
+        return $PAGE->url->out_as_local_url();;
     }
 
     // Adds course category name.
