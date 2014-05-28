@@ -65,32 +65,33 @@ function ga_trackurl() {
 }
 
 function ga_key() {
-    $key = get_config('local_googleanalytics', 'gakey');
-    if (empty($key)) {
+    $configs = get_config('local_googleanalytics');
+    if (!$configs->enabled || empty($configs->gakey)) {
         return false;
     } else {
-        return $key;
+        return $configs->gakey;
     }
 }
 
-$trackurl = ga_trackurl();
-$gakey = ga_key();
+// Don't run lib code during cron runs.
+if (!defined("CLI_SCRIPT") || (defined("CLI_SCRIPT") && !CLI_SCRIPT)) {
+    $gakey = ga_key();
+    if ($gakey) {
+        $trackurl = ga_trackurl();
+        $CFG->additionalhtmlfooter .= "
+        <script type='text/javascript' name='localga'>
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', '".$gakey."']);
+          _gaq.push(['_trackPageview','/".$trackurl."']);
 
-if ($gakey) {
-    $CFG->additionalhtmlfooter .= "
-    <script type='text/javascript' name='localga'>
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '".$gakey."']);
-      _gaq.push(['_trackPageview','/".$trackurl."']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>";
-}
-
-if (debugging()) {
-    $CFG->additionalhtmlfooter .= "<span class='badge badge-success'>/".$trackurl."</span>";
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>";
+        if (debugging()) {
+            $CFG->additionalhtmlfooter .= "<span class='badge badge-success'>/".$trackurl."</span>";
+        }
+    }
 }
